@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Segmentation Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Layout */
+        .sidebar {
+            width: 250px;
+            background: #2c3e50;
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            background: #1a252f;
+            padding: 20px;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .sidebar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            display: block;
+            padding: 12px 20px;
+            transition: all 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: #34495e;
+            padding-left: 30px;
+        }
+
+        .sidebar hr {
+            margin: 20px;
+            border: none;
+            border-top: 1px solid #34495e;
+        }
+
+        .main {
+            margin-left: 250px;
+            margin-right: 250px;
+            flex: 1;
+            padding: 30px;
+            transition: margin-right 0.3s;
+        }
+
+        .main.expanded {
+            margin-right: 50px;
+        }
+
+        /* Upload Section */
+        .upload-container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .drop-zone {
+            border: 2px dashed #3498db;
+            border-radius: 8px;
+            padding: 60px 20px;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .drop-zone:hover {
+            background: #e3f2fd;
+            border-color: #2980b9;
+        }
+
+        /* Video Preview */
+        .video-preview {
+            cursor: pointer;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .video-preview img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .video-preview:hover {
+            transform: scale(1.02);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 68px;
+            height: 48px;
+            pointer-events: none;
+        }
+
+        .duration {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        /* Right Panel */
+        .help-panel {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            transition: transform 0.3s;
+        }
+
+        .help-panel.collapsed {
+            transform: translateX(200px);
+        }
+
+        .help-header {
+            background: #f8f9fa;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .collapse-btn {
+            background: none;
+            border: 1px solid #ddd;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            border-radius: 4px;
+        }
+
+        .help-content {
+            padding: 20px;
+        }
+
+        .tip {
+            margin-bottom: 25px;
+            cursor: pointer;
+        }
+
+        .tip img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .tip:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Floating Help Button */
+        .help-btn {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .help-panel.collapsed ~ .help-btn {
+            display: flex;
+        }
+
+        .help-btn:hover {
+            transform: translateY(-50%) scale(1.05);
+            background: #2980b9;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3); }
+            50% { box-shadow: 0 4px 25px rgba(52, 152, 219, 0.6), 0 0 0 10px rgba(52, 152, 219, 0.1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 30px;
+            overflow-y: auto;
+            max-height: calc(90vh - 80px);
+        }
+
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .tutorial {
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .tutorial:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .tutorial img {
+            width: 100%;
+        }
+
+        .tutorial h3 {
+            padding: 15px;
+            font-size: 1.1rem;
+        }
+
+        .tutorial p {
+            padding: 0 15px 15px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar { width: 200px; }
+            .main { margin-left: 200px; margin-right: 0; }
+            .help-panel { width: 200px; }
+            .tutorial-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .sidebar, .help-panel { width: 100%; position: relative; }
+            .main { margin: 0; }
+            .help-btn { bottom: 20px; top: auto; transform: none; }
+            body { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+        <h2>PDF Segmentation</h2>
+        <nav>
+            <a href="#upload">Upload</a>
+            <a href="#segment">Segment</a>
+            <a href="#label">Label</a>
+            <a href="#export">Export</a>
+            <hr>
+            <a href="#" onclick="openModal(event)">📚 Tutorials</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main expanded">
+        <h1>Upload Your PDF</h1>
+        
+        <div class="upload-container">
+            <div class="drop-zone">
+                <div class="empty-state">
+                    <div class="video-preview" onclick="playVideo(this)" style="position: relative;">
+                        <!-- Replace with your GIF URL -->
+                        <img src="https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif" 
+                             alt="PDF Segmentation Tutorial Preview">
+                        <svg class="play-button" viewBox="0 0 68 48">
+                            <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#212121" fill-opacity="0.8"></path>
+                            <path d="M 45,24 27,14 27,34" fill="#fff"></path>
+                        </svg>
+                        <span class="duration">2:17</span>
+                    </div>
+                    <h3 style="margin-top: 20px;">Learn PDF Segmentation in 2 minutes</h3>
+                    <p style="margin-top: 10px; color: #666;">Watch tutorial or drag PDF here</p>
+                </div>
+                
+                <div class="upload-state" style="display: none;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">📁</div>
+                    <p>Drop PDF files here</p>
+                </div>
+            </div>
+            
+            <button style="margin-top: 20px; padding: 10px 30px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Browse Files
+            </button>
+        </div>
+    </main>
+
+    <!-- Right Help Panel -->
+    <aside class="help-panel collapsed">
+        <div class="help-header">
+            <h3>Need Help?</h3>
+            <button class="collapse-btn" onclick="toggleHelp()">+</button>
+        </div>
+        <div class="help-content">
+            <div class="tip" onclick="playTip('start')">
+                <img src="https://via.placeholder.com/200x112/3498db/ffffff?text=Start">
+                <h4>Getting Started</h4>
+                <p style="font-size: 0.85rem; color: #666;">Upload and segment your first PDF</p>
+            </div>
+            
+            <div class="tip" onclick="playTip('draw')">
+                <img src="https://via.placeholder.com/200x112/2ecc71/ffffff?text=Draw">
+                <h4>Drawing Segments</h4>
+                <p style="font-size: 0.85rem; color: #666;">Create precise regions</p>
+            </div>
+            
+            <div class="tip" onclick="playTip('label')">
+                <img src="https://via.placeholder.com/200x112/e74c3c/ffffff?text=Label">
+                <h4>Adding Labels</h4>
+                <p style="font-size: 0.85rem; color: #666;">Classify your segments</p>
+            </div>
+            
+            <div class="tip" onclick="playTip('export')">
+                <img src="https://via.placeholder.com/200x112/f39c12/ffffff?text=Export">
+                <h4>Export Options</h4>
+                <p style="font-size: 0.85rem; color: #666;">JSON, Markdown formats</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Floating Help Button -->
+    <button class="help-btn pulse" onclick="toggleHelp()">
+        <span style="background: white; color: #3498db; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">?</span>
+        <span>Help</span>
+    </button>
+
+    <!-- Tutorial Modal -->
+    <div class="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2>Tutorial Center</h2>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="tutorial-grid">
+                    <div class="tutorial" onclick="playTutorial('complete')">
+                        <img src="https://via.placeholder.com/280x157/3498db/ffffff?text=Complete+Guide">
+                        <h3>Complete Guide</h3>
+                        <p>Everything from start to finish (8:45)</p>
+                    </div>
+                    
+                    <div class="tutorial" onclick="playTutorial('quick')">
+                        <img src="https://via.placeholder.com/280x157/2ecc71/ffffff?text=Quick+Start">
+                        <h3>Quick Start</h3>
+                        <p>Get running in 3 minutes (2:17)</p>
+                    </div>
+                    
+                    <div class="tutorial" onclick="playTutorial('advanced')">
+                        <img src="https://via.placeholder.com/280x157/e74c3c/ffffff?text=Advanced">
+                        <h3>Advanced Techniques</h3>
+                        <p>Complex layouts (5:30)</p>
+                    </div>
+                    
+                    <div class="tutorial" onclick="playTutorial('api')">
+                        <img src="https://via.placeholder.com/280x157/9b59b6/ffffff?text=API">
+                        <h3>API Integration</h3>
+                        <p>Automate your workflow (6:20)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Help Panel
+        function toggleHelp() {
+            const panel = document.querySelector('.help-panel');
+            const main = document.querySelector('.main');
+            const btn = document.querySelector('.collapse-btn');
+            const helpBtn = document.querySelector('.help-btn');
+            
+            panel.classList.toggle('collapsed');
+            main.classList.toggle('expanded');
+            btn.textContent = panel.classList.contains('collapsed') ? '+' : '−';
+            
+            // Stop pulsing after first click
+            helpBtn.classList.remove('pulse');
+            localStorage.setItem('helpSeen', 'true');
+        }
+
+        // Modal Functions
+        function openModal(e) {
+            e.preventDefault();
+            document.querySelector('.modal').classList.add('active');
+        }
+
+        function closeModal(e) {
+            if (e) e.preventDefault();
+            document.querySelector('.modal').classList.remove('active');
+        }
+
+        // Video Players (placeholders)
+        function playVideo(el) {
+            alert('Playing main tutorial video');
+        }
+
+        function playTip(type) {
+            alert(`Playing tip: ${type}`);
+        }
+
+        function playTutorial(type) {
+            alert(`Playing tutorial: ${type}`);
+        }
+
+        // File Upload
+        const dropZone = document.querySelector('.drop-zone');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(event => {
+            dropZone.addEventListener(event, e => e.preventDefault());
+        });
+
+        dropZone.addEventListener('drop', e => {
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                document.querySelector('.empty-state').style.display = 'none';
+                document.querySelector('.upload-state').style.display = 'block';
+                alert(`${files.length} file(s) uploaded`);
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if returning user
+            if (localStorage.getItem('helpSeen')) {
+                document.querySelector('.help-btn').classList.remove('pulse');
+            }
+        });
+
+        // Escape key closes modal
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+</html>
