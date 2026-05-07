@@ -1,0 +1,91 @@
+== Boxes: ==
+
+      <div class="container aos-init" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Services</h2>
+          
+        </div>
+
+          <div class="row row-cols-5">
+          <div class="col-xl col-md-6 d-flex align-items-stretch aos-init" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-tag"></i></div>
+              <h4><a href="">Document Annotation and Labeling</a></h4>
+              <p>Automatically annotate and label documents with entities, relationships, and semantic tags—ready for LLM training, RAG pipelines, and machine learning workflows.</p>
+            </div>
+          </div>
+
+          <div class="col-xl col-md-6 d-flex align-items-stretch mt-4 mt-md-0 aos-init" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href="">PDF to HTML API</a></h4>
+              <p>Professional-grade PDF to HTML conversion with advanced layout preservation, perfect for RAG applications and document processing pipelines.</p>
+            </div>
+          </div>
+
+
+
+          <div class="col-xl col-md-6 d-flex align-items-stretch mt-4 mt-md-0 aos-init" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-file"></i></div>
+              <h4><a href="">PDF to Word</a></h4>
+              <p>Convert your PDF to machine and human readable Word documents with high fidelity formatting preservation.</p>
+            </div>
+          </div>
+
+          <div class="col-xl col-md-6 d-flex align-items-stretch mt-4 mt-xl-0 aos-init" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-tachometer"></i></div>
+              <h4><a href="">Form to Excel</a></h4>
+              <p>Extract form and tabular data from PDFs and Images into structured Excel formats with intelligent data recognition.</p>
+            </div>
+          </div>
+
+          <div class="col-xl col-md-6 d-flex align-items-stretch mt-4 mt-xl-0 aos-init" data-aos="zoom-in" data-aos-delay="400">
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-layer"></i></div>
+              <h4><a href="">PDF to HTML</a></h4>
+              <p>Transform PDF documents into responsive HTML with preserved styling, fonts, and layout structure for web applications.</p>
+            </div>
+          </div>
+
+        </div>
+
+
+
+== Services section ==
+      </div>
+
+        <ul id="portfolio-flters" class="d-flex justify-content-center aos-init" data-aos="fade-up" data-aos-delay="100">
+          <a href="https://aiasset-management.com/datalabeling/"><li data-filter=".filter-label">Auto Label</li></a>
+          <a href="https://www.formtoexcel.com/"><li data-filter="*">Form to Excel</li></a>
+          <a href="https://www.formtoexcel.com/pdf-to-word/"><li data-filter=".filter-app">PDF to Word</li></a>
+          <a href="https://edit-pdf.formtoexcel.com/"><li data-filter=".filter-card">Edit PDF</li></a>
+          <!--<li data-filter=".filter-web">Your library</li>-->
+        </ul>
+
+      
+
+      </div>
+
+
+== Links the bottom ==
+          <div class="col-lg-6 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://aiasset-management.com/datalabeling/" target="_blank">Auto Label/Annotate Documents</a></li>
+			  <li><i class="bx bx-chevron-right"></i> <a href="https://chat.formtoexcel.com/" target="_blank">Language Models</a></li>
+			  <li><i class="bx bx-chevron-right"></i> <a href="https://www.formtoexcel.com/" target="_blank">Form to Excel</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://www.formtoexcel.com/pdf-to-word/" target="_blank">PDF to Word</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://edit-pdf.formtoexcel.com/" target="_blank">Edit PDF</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://aiasset-management.com/terms.html" target="_blank">Terms and Conditions</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="https://aiasset-management.com/privacy.html" target="_blank">Privacy Policy</a></li>
+              
+            </ul>
+          </div>
+		  
+== Map at bottom: ==
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101990.06299556483!2d-122.02!3d37.335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fcae48af93ff5%3A0xb99d8c0aca9f4d6!2sSan%20Jose%2C%20CA!5e0!3m2!1sen!2sus!4v1234567890" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen="" loading="lazy"></iframe>
+              <!-- <iframe src="AI%20Asset%20Management_files/embed.htm" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen=""></iframe>
+            -->
