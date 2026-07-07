@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Invoice Labeling Tool | Auto-Label Invoices, Receipts &amp; POs for AI</title>
+<meta name="description" content="Auto-label invoices for AI training. Upload invoices, receipts, and purchase orders. Get ML-ready JSON in seconds. Free tool by AI Asset Management.">
+<meta name="keywords" content="invoice labeling, invoice data extraction, invoice annotation, receipt labeling, purchase order annotation, invoice AI training data, invoice OCR, financial document labeling AI">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="canonical" href="https://aiasset-management.com/data-labeling/invoice">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aiasset-management.com/data-labeling/invoice">
+<meta property="og:title" content="Invoice Labeling Tool | Auto-Label Invoices for AI">
+<meta property="og:description" content="Auto-label invoices, receipts, and purchase orders for AI training. Free tool, JSON export.">
+<meta property="og:image" content="https://aiasset-management.com/invoicelabeling/images/invoice-labeling-cover.webp">
+<meta property="og:site_name" content="AI Asset Management">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Invoice Labeling Tool | Auto-Label Invoices for AI">
+<meta name="twitter:description" content="Auto-label invoices, receipts, and purchase orders for AI training. Free tool, JSON export.">
+<meta name="twitter:image" content="https://aiasset-management.com/invoicelabeling/images/invoice-labeling-cover.webp">
+
+<link rel="icon" type="image/webp" href="https://aiasset-management.com/datalabeling/images/AIAssetLogo44K.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Invoice Labeling",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "description": "Auto-label invoices for AI training. Upload invoices, receipts, and purchase orders. Get ML-ready JSON in seconds.",
+  "url": "https://aiasset-management.com/data-labeling/invoice",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "96"}
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What is invoice labeling?", "acceptedAnswer": {"@type": "Answer", "text": "Invoice labeling is the process of annotating invoices and related financial documents with structured labels that machine learning models use as training data. Each region of the document is tagged with its semantic role (vendor, line item, quantity, unit price, tax, total, due date) and exported in a format your ML pipeline can consume."}},
+    {"@type": "Question", "name": "Which invoice types are supported?", "acceptedAnswer": {"@type": "Answer", "text": "Vendor invoices, receipts, purchase orders, credit notes and refunds, utility and recurring bills, and multi-page or batch invoices from any layout or template."}},
+    {"@type": "Question", "name": "How accurate is automated invoice labeling?", "acceptedAnswer": {"@type": "Answer", "text": "Auto-labels are typically 92%+ accurate on standard invoice layouts. Confidence scores are attached to every label so low-confidence fields can be flagged for manual review."}},
+    {"@type": "Question", "name": "Is the tool free to use?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Label the first 5 pages without an account. Larger batches and API access are available on paid plans."}},
+    {"@type": "Question", "name": "Is my invoice data secure and confidential?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Documents are processed over encrypted connections, never used for model training without consent, and can be deleted immediately after labeling. Enterprise plans include SOC 2 compliance and private deployment options."}}
+  ]
+}
+</script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#0C447C;
+  --brand-dark:#042C53;
+  --brand-50:#E6F1FB;
+  --text:#1a1a1a;
+  --muted:#5f5f5a;
+  --hint:#9b9a94;
+  --bg:#ffffff;
+  --bg-soft:#f7f6f1;
+  --border:rgba(0,0,0,.08);
+  --border-strong:rgba(0,0,0,.15);
+  --radius:10px;
+  --radius-lg:14px;
+  --max:1100px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--brand);text-decoration:none}
+.container{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+/* ===== HEADER ===== */
+.site-header{border-bottom:.5px solid var(--border);background:#fff;position:sticky;top:0;z-index:100}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:var(--max);margin:0 auto}
+.logo{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:500;color:var(--text)}
+.logo-mark{width:28px;height:28px;border-radius:7px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;letter-spacing:.02em}
+.nav{display:flex;gap:24px;align-items:center;font-size:14px}
+.nav a{color:var(--muted);font-weight:400}
+.nav a:hover{color:var(--text)}
+.nav-cta{background:var(--brand);color:#fff!important;padding:8px 16px;border-radius:8px;font-weight:500;font-size:13px}
+.nav-cta:hover{background:var(--brand-dark);color:#fff!important}
+
+/* ===== HERO ===== */
+.hero{padding:72px 0 48px;text-align:center;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 100%)}
+.eyebrow{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:var(--brand-50);color:var(--brand);padding:5px 14px;border-radius:20px;margin-bottom:20px;font-weight:500}
+h1{font-size:48px;font-weight:600;line-height:1.1;letter-spacing:-.02em;max-width:780px;margin:0 auto 18px}
+h1 .accent{color:var(--brand)}
+.hero-sub{font-size:18px;color:var(--muted);max-width:620px;margin:0 auto 32px;line-height:1.5}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:12px 22px;border-radius:8px;font-size:15px;font-weight:500;cursor:pointer;border:none;transition:all .15s;text-decoration:none}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover{background:var(--brand-dark);color:#fff;transform:translateY(-1px)}
+.btn-ghost{background:#fff;color:var(--text);border:.5px solid var(--border-strong)}
+.btn-ghost:hover{border-color:var(--text)}
+.cta-note{font-size:13px;color:var(--hint);margin-top:8px}
+
+/* ===== UPLOAD TOOL ===== */
+.tool-section{padding:0 0 64px;background:var(--bg-soft)}
+.tool-wrap{max-width:720px;margin:0 auto;padding:0 24px}
+.upload-zone{background:#fff;border:2px dashed var(--border-strong);border-radius:var(--radius-lg);padding:48px 24px;text-align:center;transition:border-color .2s}
+.upload-zone:hover{border-color:var(--brand)}
+.upload-icon{font-size:40px;color:var(--brand);margin-bottom:12px;line-height:1}
+.upload-title{font-size:17px;font-weight:500;color:var(--text);margin-bottom:6px}
+.upload-sub{font-size:14px;color:var(--muted);margin-bottom:20px}
+.upload-btn{background:var(--brand);color:#fff;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:500;border:none;cursor:pointer}
+.upload-btn:hover{background:var(--brand-dark)}
+#fileInput{display:none}
+.file-status{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:13px;color:var(--muted);padding:0 4px}
+.link-btn{background:none;border:none;color:var(--brand);font-size:13px;cursor:pointer;padding:0}
+.trust-row{display:flex;justify-content:center;gap:32px;margin-top:32px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+.trust-icon{color:var(--brand);font-size:16px}
+
+/* ===== SECTIONS ===== */
+section{padding:80px 0}
+.section-eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);font-weight:500;margin-bottom:10px;text-align:center}
+h2{font-size:36px;font-weight:600;line-height:1.15;letter-spacing:-.01em;text-align:center;margin-bottom:14px;max-width:680px;margin-left:auto;margin-right:auto}
+.section-lead{font-size:17px;color:var(--muted);text-align:center;max-width:600px;margin:0 auto 48px;line-height:1.6}
+
+/* ===== HOW IT WORKS ===== */
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.how-card{background:var(--bg-soft);border-radius:var(--radius-lg);padding:32px 24px}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--brand);color:#fff;border-radius:50%;font-size:14px;font-weight:600;margin-bottom:18px}
+.how-card h3{font-size:18px;font-weight:600;margin-bottom:8px;color:var(--text)}
+.how-card p{font-size:15px;color:var(--muted);line-height:1.6}
+
+/* ===== DOCUMENT TYPES ===== */
+.docs-bg{background:var(--bg-soft)}
+.docs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.doc-card{background:#fff;border:.5px solid var(--border);border-radius:var(--radius);padding:24px;transition:all .2s}
+.doc-card:hover{border-color:var(--brand);transform:translateY(-2px)}
+.doc-icon{width:44px;height:44px;background:var(--brand-50);color:var(--brand);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+.doc-card h3{font-size:16px;font-weight:600;margin-bottom:6px;color:var(--text)}
+.doc-card p{font-size:14px;color:var(--muted);line-height:1.5}
+
+/* ===== EXPORT/INTEGRATION ===== */
+.integ-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:780px;margin:0 auto}
+.integ-card{background:#fff;border:.5px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center}
+.integ-icon{font-size:24px;color:var(--brand);margin-bottom:8px}
+.integ-card div{font-size:13px;font-weight:500;color:var(--text)}
+
+/* ===== CTA BAND ===== */
+.cta-band{background:var(--brand);color:#fff;padding:64px 24px;text-align:center}
+.cta-band h2{color:#fff;margin-bottom:12px}
+.cta-band p{color:rgba(255,255,255,.85);font-size:17px;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto}
+.cta-band .btn-primary{background:#fff;color:var(--brand)}
+.cta-band .btn-primary:hover{background:#f0f0f0;color:var(--brand-dark)}
+
+/* ===== FAQ ===== */
+.faq-bg{background:var(--bg-soft)}
+.faq-list{max-width:760px;margin:0 auto}
+.faq-item{background:#fff;border:.5px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
+.faq-q{padding:18px 22px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:16px;font-weight:500;color:var(--text);list-style:none}
+.faq-q::-webkit-details-marker{display:none}
+.faq-q::after{content:"+";font-size:22px;color:var(--brand);font-weight:300;line-height:1}
+details[open] .faq-q::after{content:"−"}
+.faq-a{padding:0 22px 18px;font-size:15px;color:var(--muted);line-height:1.6}
+
+/* ===== RELATED ===== */
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:780px;margin:0 auto}
+.related-card{background:#fff;border:.5px solid var(--border);border-radius:var(--radius);padding:20px;display:block;color:var(--text);transition:all .2s}
+.related-card:hover{border-color:var(--brand);color:var(--text)}
+.related-card h3{font-size:14px;font-weight:600;color:var(--brand);margin-bottom:4px}
+.related-card p{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* ===== FOOTER ===== */
+.site-footer{background:#fff;border-top:.5px solid var(--border);padding:32px 24px;text-align:center}
+.footer-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-copy{font-size:13px;color:var(--hint)}
+.footer-nav{display:flex;gap:20px;font-size:13px}
+.footer-nav a{color:var(--muted)}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px){
+  h1{font-size:34px}
+  h2{font-size:28px}
+  .hero{padding:48px 0 36px}
+  section{padding:56px 0}
+  .how-grid,.docs-grid{grid-template-columns:1fr}
+  .integ-grid{grid-template-columns:repeat(2,1fr)}
+  .nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="https://aiasset-management.com/" class="logo">
+      <span class="logo-mark">AI</span>
+      <span>AI Asset Management</span>
+    </a>
+    <nav class="nav">
+      <a href="https://aiasset-management.com/datalabeling/">All Tools</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://datalabeling.aiasset-management.com/?model=invoice" class="nav-cta">Try Free</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" style="padding-top:72px;padding-bottom:0">
+  <div class="container">
+    <span class="eyebrow">Invoice AI · New</span>
+    <h1>Label invoices <span class="accent">in seconds</span></h1>
+    <p class="hero-sub">Upload invoices, receipts, and purchase orders. Get ML-ready labels with line items, totals, and vendor data structured for your AI pipeline.</p>
+    <div class="cta-row">
+      <a href="https://datalabeling.aiasset-management.com/?model=invoice" class="btn btn-primary">Try Free →</a>
+      <a href="#how" class="btn btn-ghost">See how it works</a>
+    </div>
+    <p class="cta-note">No signup · First 5 pages free · JSON / Markdown export</p>
+  </div>
+</section>
+
+<!-- ===== UPLOAD TOOL ===== -->
+<section class="tool-section" style="padding-top:48px">
+  <div class="tool-wrap">
+    <div class="upload-zone" id="uploadZone">
+      <div class="upload-icon">🧾</div>
+      <div class="upload-title">Drop your invoice PDF here</div>
+      <div class="upload-sub">Invoices · Receipts · Purchase orders · Credit notes · PDF up to 50 pages</div>
+      <input type="file" id="fileInput" accept=".pdf" multiple>
+      <button class="upload-btn" onclick="document.getElementById('fileInput').click()">Choose Files</button>
+    </div>
+    <div class="file-status">
+      <span id="fileCount">0 files selected</span>
+      <button class="link-btn" id="clearFiles">Clear</button>
+    </div>
+
+    <div class="trust-row">
+      <div class="trust-item"><span class="trust-icon">🛡</span> SOC 2 ready</div>
+      <div class="trust-item"><span class="trust-icon">🔒</span> Encrypted transit</div>
+      <div class="trust-item"><span class="trust-icon">⚡</span> 92%+ accuracy</div>
+      <div class="trust-item"><span class="trust-icon">{ }</span> JSON / Markdown</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section id="how">
+  <div class="container">
+    <div class="section-eyebrow">How it works</div>
+    <h2>Three steps to labeled data</h2>
+    <p class="section-lead">From raw PDF to training-ready dataset in under a minute.</p>
+
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="step-num">1</div>
+        <h3>Upload</h3>
+        <p>Drop any invoice PDF — scanned or native. Invoices, receipts, purchase orders, credit notes, anything.</p>
+      </div>
+      <div class="how-card">
+        <div class="step-num">2</div>
+        <h3>Auto-label</h3>
+        <p>AI detects vendor, line items, totals, tax, and payment terms using an invoice-trained taxonomy.</p>
+      </div>
+      <div class="how-card">
+        <div class="step-num">3</div>
+        <h3>Export</h3>
+        <p>Download as JSON or Markdown. Feeds directly into PyTorch, TensorFlow, or Hugging Face.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DOCUMENT TYPES ===== -->
+<section class="docs-bg">
+  <div class="container">
+    <div class="section-eyebrow">Document types</div>
+    <h2>Built for every invoice format</h2>
+    <p class="section-lead">Domain-trained models for the financial documents your team actually works with.</p>
+
+    <div class="docs-grid">
+      <div class="doc-card">
+        <div class="doc-icon">🧾</div>
+        <h3>Vendor Invoices</h3>
+        <p>Line items, quantities, unit prices, taxes, and totals extracted from any template.</p>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">🛒</div>
+        <h3>Receipts</h3>
+        <p>Merchant, date, itemized purchases, and payment method identified automatically.</p>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">📦</div>
+        <h3>Purchase Orders</h3>
+        <p>PO number, vendor, line items, and delivery terms structured for procurement systems.</p>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">💳</div>
+        <h3>Credit Notes &amp; Refunds</h3>
+        <p>Original invoice reference, adjusted amounts, and reason codes extracted cleanly.</p>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">💡</div>
+        <h3>Utility &amp; Recurring Bills</h3>
+        <p>Account number, billing period, usage, and charges broken down by line.</p>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">📑</div>
+        <h3>Multi-Page &amp; Batch Invoices</h3>
+        <p>Header and footer detection across multi-page documents and bulk invoice batches.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INTEGRATIONS ===== -->
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Built for ML pipelines</div>
+    <h2>Drop straight into your stack</h2>
+    <p class="section-lead">Compatible with the frameworks and tools your team already uses.</p>
+
+    <div class="integ-grid">
+      <div class="integ-card"><div class="integ-icon">🔥</div><div>PyTorch</div></div>
+      <div class="integ-card"><div class="integ-icon">⚡</div><div>TensorFlow</div></div>
+      <div class="integ-card"><div class="integ-icon">🤗</div><div>Hugging Face</div></div>
+      <div class="integ-card"><div class="integ-icon">📐</div><div>LayoutLMv3</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA BAND ===== -->
+<section class="cta-band">
+  <div class="container">
+    <h2>Start labeling now</h2>
+    <p>No credit card. No signup. First 5 pages free.</p>
+    <a href="https://datalabeling.aiasset-management.com/?model=invoice" class="btn btn-primary">Upload Your PDF →</a>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq-bg" id="faq">
+  <div class="container">
+    <div class="section-eyebrow">FAQ</div>
+    <h2>Questions, answered</h2>
+    <p class="section-lead">Everything you need to know before you start.</p>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary class="faq-q">What is invoice labeling?</summary>
+        <div class="faq-a">Invoice labeling annotates invoices and related financial documents with structured labels that ML models use as training data. Each region of the document is tagged with its semantic role (vendor, line item, quantity, unit price, tax, total, due date) and exported in a format your pipeline can consume directly.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Which invoice types are supported?</summary>
+        <div class="faq-a">Vendor invoices, receipts, purchase orders, credit notes and refunds, utility and recurring bills, and multi-page or batch invoices from any layout or template.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">How accurate is automated invoice labeling?</summary>
+        <div class="faq-a">Labels are typically 92%+ accurate on standard invoice layouts. Confidence scores attach to every label so low-confidence fields can be flagged for manual review before training runs.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What export formats are supported?</summary>
+        <div class="faq-a">Structured JSON with bounding boxes, segment text, label classifications, and confidence scores. Markdown is also supported. Both are directly compatible with PyTorch DataLoaders, TensorFlow Datasets, and Hugging Face Transformers.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Is the tool free?</summary>
+        <div class="faq-a">Yes. Label your first 5 pages without an account. Larger batches and API access are available on paid plans.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Is my invoice data secure and confidential?</summary>
+        <div class="faq-a">Yes. Documents are processed over encrypted connections, never used for model training without explicit consent, and can be deleted immediately after labeling. Enterprise plans include SOC 2 compliance and private deployment options.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RELATED TOOLS ===== -->
+<section>
+  <div class="container">
+    <div class="section-eyebrow">Related tools</div>
+    <h2>Explore the platform</h2>
+
+    <div class="related-grid">
+      <a href="https://aiasset-management.com/datalabeling/" class="related-card">
+        <h3>General Data Labeling →</h3>
+        <p>Multi-domain labeling for any PDF type.</p>
+      </a>
+      <a href="https://aiasset-management.com/financiallabeling/" class="related-card">
+        <h3>Financial Labeling →</h3>
+        <p>Statements, 10-Ks, and financial reports.</p>
+      </a>
+      <a href="https://aiasset-management.com/" class="related-card">
+        <h3>Platform →</h3>
+        <p>The full AI Asset Management suite.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-copy">© <span id="year">2026</span> AI Asset Management</div>
+    <nav class="footer-nav">
+      <a href="https://aiasset-management.com/">Home</a>
+      <a href="https://aiasset-management.com/datalabeling/">All Tools</a>
+      <a href="#faq">FAQ</a>
+      <a href="#">Privacy</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const fileInput = document.getElementById('fileInput');
+const fileCount = document.getElementById('fileCount');
+const clearBtn = document.getElementById('clearFiles');
+const uploadZone = document.getElementById('uploadZone');
+
+fileInput.addEventListener('change', () => {
+  const n = fileInput.files.length;
+  fileCount.textContent = `${n} file${n !== 1 ? 's' : ''} selected`;
+});
+
+clearBtn.addEventListener('click', () => {
+  fileInput.value = '';
+  fileCount.textContent = '0 files selected';
+});
+
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.style.borderColor = 'var(--brand)'; });
+uploadZone.addEventListener('dragleave', () => { uploadZone.style.borderColor = ''; });
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadZone.style.borderColor = '';
+  fileInput.files = e.dataTransfer.files;
+  fileCount.textContent = `${e.dataTransfer.files.length} file(s) selected`;
+});
+</script>
+
+</body>
+</html>
