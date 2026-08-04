@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern FAQ Section</title>
+
+<link href="Modern%20FAQ%20Section_files/css2_44s4.css" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#ffffff;
+    color:#0f172a;
+    min-height:100vh;
+}
+
+/* Background Decoration */
+
+body::before{
+    content:'';
+    position:fixed;
+    top:-300px;
+    right:-200px;
+    width:700px;
+    height:700px;
+    background:radial-gradient(circle,
+        rgba(0,212,255,.15),
+        transparent 70%);
+    z-index:-1;
+}
+
+body::after{
+    content:'';
+    position:fixed;
+    bottom:-300px;
+    left:-200px;
+    width:700px;
+    height:700px;
+    background:radial-gradient(circle,
+        rgba(37,99,235,.12),
+        transparent 70%);
+    z-index:-1;
+}
+
+/* Section */
+
+.faq-section{
+    max-width:1000px;
+    margin:auto;
+    padding:100px 20px;
+}
+
+/* Header */
+
+.section-header{
+    text-align:center;
+    margin-bottom:70px;
+}
+
+.badge{
+    display:inline-block;
+    padding:10px 22px;
+    border-radius:999px;
+    background:rgba(37,99,235,.08);
+    color:#2563eb;
+    font-weight:600;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.section-header h1{
+    font-size:clamp(2.8rem,6vw,4.8rem);
+    font-weight:800;
+    line-height:1.1;
+    margin-bottom:20px;
+}
+
+.section-header p{
+    max-width:700px;
+    margin:auto;
+    color:#64748b;
+    font-size:1.1rem;
+    line-height:1.8;
+}
+
+/* FAQ Container */
+
+.faq-container{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+/* FAQ Card */
+
+.faq-item{
+    background:#fff;
+    border-radius:24px;
+    border:1px solid #eef2f7;
+    overflow:hidden;
+    box-shadow:
+        0 8px 20px rgba(15,23,42,.05);
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+.faq-item:hover{
+    transform:translateY(-6px);
+    box-shadow:
+        0 20px 45px rgba(15,23,42,.12);
+}
+
+/* Question */
+
+.faq-question{
+    width:100%;
+    border:none;
+    background:none;
+    cursor:pointer;
+    padding:28px 32px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    text-align:left;
+    font-size:1.08rem;
+    font-weight:600;
+    color:#0f172a;
+}
+
+/* Icon */
+
+.icon{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #00d4ff
+    );
+    color:#fff;
+    font-size:24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.4s ease;
+    flex-shrink:0;
+    box-shadow:
+        0 8px 20px rgba(37,99,235,.25);
+}
+
+/* Answer */
+
+.faq-answer{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .45s ease;
+}
+
+.faq-answer p{
+    padding:0 32px 28px;
+    color:#64748b;
+    line-height:1.8;
+}
+
+/* Active */
+
+.faq-item.active{
+    border-color:#60a5fa;
+}
+
+.faq-item.active .faq-answer{
+    max-height:250px;
+}
+
+.faq-item.active .icon{
+    transform:rotate(45deg);
+}
+
+/* CTA Card */
+
+.cta-card{
+    margin-top:50px;
+    padding:40px;
+    border-radius:28px;
+    text-align:center;
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #00d4ff
+    );
+    color:white;
+    box-shadow:
+        0 20px 50px rgba(37,99,235,.25);
+}
+
+.cta-card h3{
+    font-size:2rem;
+    margin-bottom:12px;
+}
+
+.cta-card p{
+    opacity:.9;
+    margin-bottom:25px;
+}
+
+.cta-btn{
+    display:inline-block;
+    padding:14px 30px;
+    border-radius:50px;
+    background:white;
+    color:#2563eb;
+    text-decoration:none;
+    font-weight:700;
+    transition:.3s;
+}
+
+.cta-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .faq-section{
+        padding:70px 15px;
+    }
+
+    .faq-question{
+        padding:22px;
+        font-size:1rem;
+    }
+
+    .faq-answer p{
+        padding:0 22px 22px;
+    }
+
+    .cta-card{
+        padding:30px 20px;
+    }
+
+    .cta-card h3{
+        font-size:1.6rem;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<section class="faq-section">
+
+    <div class="section-header">
+        <span class="badge">FAQ</span>
+
+        <h1>Frequently Asked Questions</h1>
+
+        <p>
+            Find answers to common questions about our services,
+            pricing, project delivery, support, and security.
+        </p>
+    </div>
+
+    <div class="faq-container">
+
+        <div class="faq-item active">
+            <button class="faq-question">
+                What services do you offer?
+                <div class="icon">+</div>
+            </button>
+
+            <div class="faq-answer">
+                <p>
+                    We provide AI solutions, software development,
+                    data annotation, automation services and custom
+                    digital transformation solutions.
+                </p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                General Labeling
+                <div class="icon">+</div>
+            </button>
+
+            <div class="faq-answer">
+                <p>
+                    Most projects are completed within 2–8 weeks,
+                    depending on scope, requirements, and integrations.
+                </p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+               Financial Labeling
+                <div class="icon">+</div>
+            </button>
+
+            <div class="faq-answer">
+                <p>
+                    Yes, we offer maintenance plans, upgrades,
+                    monitoring, and dedicated support after launch.
+                </p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Legal Labeling
+                <div class="icon">+</div>
+            </button>
+
+            <div class="faq-answer">
+                <p>
+                    We use encrypted storage, secure infrastructure,
+                    strict access controls and enterprise-grade
+                    security practices.
+                </p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Invoice Labeling
+                <div class="icon">+</div>
+            </button>
+
+            <div class="faq-answer">
+                <p>
+                    Absolutely. Every solution can be tailored to your
+                    business goals, workflow requirements and budget.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="cta-card">
+        <h3>Still Have Questions?</h3>
+        <p>Our team is here to help you with any additional queries.</p>
+        <a href="#" class="cta-btn">Contact Us</a>
+    </div>
+
+</section>
+
+<script>
+const faqItems = document.querySelectorAll('.faq-item');
+
+faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+
+    question.addEventListener('click', () => {
+
+        faqItems.forEach(faq => {
+            if(faq !== item){
+                faq.classList.remove('active');
+            }
+        });
+
+        item.classList.toggle('active');
+    });
+});
+</script>
+
+
+</body></html>
